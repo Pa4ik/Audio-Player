@@ -94,12 +94,20 @@ function formatTime(time) {
     if (seconds < 10) {
        seconds = "0" + seconds;
     }
+    if (isNaN(minutes) || isNaN(seconds)) {
+        return `${duration}`;
+    }
     return `${minutes}:${seconds}`;
- }
+}
+
+
+audio.addEventListener('loadedmetadata', () => {
+    durationTime.innerHTML = formatTime(audio.duration);
+});
 
 
 // Progress bar 
-function upProgress(event){
+function upProgress (event){
     const {duration, currentTime} = event.srcElement
     const progressPercent = (currentTime / duration) * 100
     progressBar.value = `${progressPercent}`
