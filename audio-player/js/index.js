@@ -124,7 +124,36 @@ function setProgress (event){
    const duration = audio.duration
    audio.currentTime = ( clickX / width) * duration
 }
-progressBar.addEventListener('click', setProgress)
+progressBar.addEventListener('click', setProgress);
+
+
+
+let isDragging = false;
+
+function dragStart(event) {
+  isDragging = true;
+}
+
+function dragEnd(event) {
+  isDragging = false;
+  const width = this.clientWidth;
+  const clickX = event.offsetX;
+  const duration = audio.duration;
+  audio.currentTime = (clickX / width) * duration;
+}
+
+function dragProgress(event) {
+  if (isDragging) {
+    const width = this.clientWidth;
+    const clickX = event.offsetX;
+    const duration = audio.duration;
+    audio.currentTime = (clickX / width) * duration;
+  }
+}
+
+progressBar.addEventListener('mousedown', dragStart);
+progressBar.addEventListener('mouseup', dragEnd);
+progressBar.addEventListener('mousemove', dragProgress);
 
 
 //auto play
