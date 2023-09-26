@@ -28,6 +28,7 @@ function loadSong(song){
     cover.src = `assets/img/cover${songIndex + 1}.png`
     backImg.src = `assets/img/cover${songIndex + 1}.png`
     songExecutor.innerHTML = artist[songIndex]
+    
 }
 loadSong(songs[songIndex])
 
@@ -61,6 +62,7 @@ playBtn.addEventListener('click', () => {
 
 // Next song 
 function nextSongs (){
+    
     songIndex++
 
     if (songIndex > songs.length -1){
@@ -106,18 +108,23 @@ audio.addEventListener('loadedmetadata', () => {
 });
 
 
+const progBar = document.querySelector('.progress')
+
 // Progress bar 
-function upProgress (event){
+function upProgress (event ) {
+   
     const {duration, currentTime} = event.srcElement
-    const progressPercent = (currentTime / duration) * 100
-    progressBar.value = `${progressPercent}`
+    const progressPercent = (currentTime * 100) / duration ;
+    // progressBar.value =`${progressPercent}`
+    progBar.style.width =`${progressPercent}%`
     currentTimes.innerHTML = formatTime(currentTime);
     durationTime.innerHTML = formatTime(duration);
+
 }
 audio.addEventListener('timeupdate', upProgress)
 
 
-// перемотка 
+// // перемотка 
 function setProgress (event){
    const width = this.clientWidth
    const clickX = event.offsetX
@@ -159,3 +166,22 @@ progressBar.addEventListener('mousemove', dragProgress);
 //auto play
 audio.addEventListener('ended', nextSongs)
 
+// audioUpdateHandler({ audio, duration }); {
+//     const progress = document.querySelector(".progress-current");
+//     const timeline = document.querySelector(".timeline-start");
+
+//     audio.addEventListener("timeupdate", ({ target }) => {
+//       const { currentTime } = target;
+//       const width = (currentTime * 100) / duration;
+
+//       timeline.innerHTML = toMinAndSec(currentTime);
+//       progress.style.width = `${width}%`;
+//     });
+
+//     audio.addEventListener("ended", ({ target }) => {
+//       target.currentTime = 0;
+//       progress.style.width = `0%`;
+
+//       this.state.repeating ? target.play() : this.handleNext();
+//     });
+//   }

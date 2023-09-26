@@ -88,16 +88,18 @@ body{
 
 #song-length{
   position: absolute;
-  bottom: 131px;
+  bottom: 143px;
   left: 33px;
     -webkit-appearance: none;
     appearance: none;
     z-index: 4;
     height: 5px;
     background: #ffffff;
-    width: 240pt;
+    width: 82%;
     border-radius: 30px;
     cursor: pointer;
+    display: grid;
+    justify-content: start;
 }
 
 .currentTime{
@@ -269,3 +271,13 @@ input[type=range] {
 }
 
 
+
+
+.progress {
+     margin: auto;
+     height: 6px;
+     position: relative;
+     background:#737873;
+     border-radius: 12px;
+     overflow: hidden;
+}
